@@ -1,16 +1,16 @@
 import { Request } from "express"
 import { Controller } from "@application/base/controller"
-import { CreateLink } from "@domain/use-cases/create-link"
 import { ShortLinkMongo } from "src/infrastructure/short-link-mongo"
 import { ConfigHelpers } from "@infra/config-helpers"
+import { GetByShortUrl } from "@domain/use-cases/get-by-short-url"
 
-export class CreateController extends Controller {
+export class GetByShortUrlController extends Controller {
   async forward(req: Request): Promise<object> {
-    const { originalUrl, customAlias, expireDate } = req.body;
-    const newShortLink = new CreateLink(
-      { originalUrl, customAlias, expireDate },
-      new ShortLinkMongo(),
-      new ConfigHelpers()
+    const { shortUrlId } = req.params
+
+    const newShortLink = new GetByShortUrl(
+      shortUrlId,
+      new ShortLinkMongo()
     )
     return await newShortLink.handle()
   }

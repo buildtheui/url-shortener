@@ -7,6 +7,7 @@ import { MongoMemoryServer } from "mongodb-memory-server";
 import { CreateURLRouter } from "@main/routes/create.route";
 import { errorHandler } from "@main/middlewares/error-handler";
 import { NotFoundError } from "@application/errors/not-found-error";
+import { GetByIdRouter } from "@main/routes/get-by-short-url.route";
 
 // TODO: refactor to clean up this index file
 
@@ -15,6 +16,7 @@ const app = express();
 
 app.use(json());
 app.use(CreateURLRouter);
+app.use(GetByIdRouter);
 
 const databaseSetup = async () => {
   const mongodb = await MongoMemoryServer.create();
