@@ -14,7 +14,8 @@ export class CreateLink {
     const { originalUrl, customAlias, expireDate } = this.data;
 
     const newShortId = this.shortLinkDB.generateShortId();
-    const shortUrl = `${this.configHelpers.getHostURL()}/${newShortId}`
+    const newPath = customAlias ? customAlias : newShortId;
+    const shortUrl = `${this.configHelpers.getHostURL()}/${newPath}`
 
     const newLink = new ShortUrl(
       newShortId,

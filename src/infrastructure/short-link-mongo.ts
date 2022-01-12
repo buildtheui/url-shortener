@@ -1,3 +1,4 @@
+import { RequestValidationError } from "@application/errors/request-validation-error";
 import {
   IShortLinkData,
   IShortLinkDB,
@@ -8,6 +9,17 @@ import { ShortLink, ShortLinkDoc } from "./model/short-link";
 
 export class ShortLinkMongo implements IShortLinkDB {
   async save(data: IShortLinkData): Promise<ShortUrlFields> {
+    let response = await ShortLink.findOne({ customAlias: data.customAlias });
+    if (response) {
+      const customMessageError = RequestValidationError.buildCustomMessage(
+        "The URL alias already exists, please try another one",
+        data.customAlias,
+        "customAlias",
+        "body"
+      );
+      throw new RequestValidationError([customMessageError]);
+    }
+
     const { id: shortId, ...rest } = data;
     const dataToSave = { ...rest, _id: shortId };
     const link = ShortLink.build(dataToSave);
@@ -16,9 +28,12 @@ export class ShortLinkMongo implements IShortLinkDB {
     return { id, originalUrl, shortUrl, customAlias, expireDate };
   }
 
-  async getByShortId(shortId: string): Promise<ShortUrlFields | null> {
-    const response = await ShortLink.findById(shortId);
-    if (!response) return null;
+  async getByShortId(idOrAlias: string): Promise<ShortUrlFields | null> {
+    let response = await ShortLink.findOne({ customAlias: idOrAlias });
+    if (!response) {
+      response = await ShortLink.findById(idOrAlias);
+      if (!response) return null;
+    }
     const { id, originalUrl, shortUrl, customAlias, expireDate } = response;
     return { id, originalUrl, shortUrl, customAlias, expireDate };
   }
