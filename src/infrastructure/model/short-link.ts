@@ -24,6 +24,10 @@ const shortLinkSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    shortUrl: {
+      type: String,
+      required: true
+    },
     customAlias: {
       type: String,
     },
