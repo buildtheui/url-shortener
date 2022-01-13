@@ -22,7 +22,7 @@ const databaseSetup = async () => {
   const mongodb = await MongoMemoryServer.create();
   const uri = mongodb.getUri();
 
-  await mongoose.connect(uri, { dbName: "shortLink" });
+  await mongoose.connect(uri, { dbName: process.env.MONGO_DB_NAME });
 };
 
 databaseSetup();
