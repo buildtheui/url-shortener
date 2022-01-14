@@ -6,9 +6,13 @@ jest.unmock("@infra/short-link-mongo");
 jest.unmock("@infra/config-helpers");
 
 describe("regarding POST /create", () => {
+  const dataInit = {
+    originalUrl: "https://www.google.com",
+  };
+
   it("should create a new short url with all the params filled", async () => {
     const data = {
-      originalUrl: "https://www.google.com",
+      ...dataInit,
       customAlias: "google",
       expireDate: Date.now() + 10000,
     };
@@ -22,19 +26,16 @@ describe("regarding POST /create", () => {
     });
   });
 
-  it("should create a new short url with id instead of alias", async () => {
-    const data = {
-      originalUrl: "https://www.google.com",
-    };
-    const response = await request(app).post("/create").send(data).expect(200);
+  it("should create a new short url with id instead of alias", async () => {    
+    const response = await request(app).post("/create").send(dataInit).expect(200);
     expect(response.body).toEqual({
       id: response.body.id,
-      originalUrl: data.originalUrl,
+      originalUrl: dataInit.originalUrl,
       shortUrl: `${process.env.HOST}/${response.body.id}`,
     });
   });
 
-  it("should fail if not valid originalUrl is sent", async () => {
+  it("should fail if invalid originalUrl is sent", async () => {
     const data = {
       originalUrl: "",
     };
@@ -54,33 +55,39 @@ describe("regarding POST /create", () => {
     expect(errTwo?.errors[0]?.message).toBe(CreateErrors.originalUrlErr);
   });
 
-  it("should fail if not valid customAlias is sent", async () => {
+  it("should fail if invalid customAlias is sent", async () => {
     const data = {
-      originalUrl: "https://www.google.com",
-      customAlias: "txt"
+      ...dataInit,
+      customAlias: "txt",
     };
     const response = await request(app).post("/create").send(data).expect(400);
 
     const err = JSON.parse(response.text);
     expect(err?.errors[0]?.message).toBe(CreateErrors.customAliasErr);
 
-    data.customAlias = "this-is-an-invalid-alias-to-long"
-    const responseTwo = await request(app).post("/create").send(data).expect(400);
+    data.customAlias = "this-is-an-invalid-alias-to-long";
+    const responseTwo = await request(app)
+      .post("/create")
+      .send(data)
+      .expect(400);
 
     const errTwo = JSON.parse(responseTwo.text);
     expect(errTwo?.errors[0]?.message).toBe(CreateErrors.customAliasErr);
 
-    data.customAlias = "is invalid"
-    const responseThree = await request(app).post("/create").send(data).expect(400);
+    data.customAlias = "is invalid";
+    const responseThree = await request(app)
+      .post("/create")
+      .send(data)
+      .expect(400);
 
     const errThree = JSON.parse(responseThree.text);
     expect(errThree?.errors[0]?.message).toBe(CreateErrors.customAliasSpaceErr);
   });
 
-  it("should fail if not valid expire data is sent", async () => {
+  it("should fail if invalid expire data is sent", async () => {
     const data = {
-      originalUrl: "https://www.google.com",
-      expireDate: "jan 31, 2022"
+      ...dataInit,
+      expireDate: "jan 31, 2022",
     };
     const response = await request(app).post("/create").send(data).expect(400);
 
@@ -88,11 +95,13 @@ describe("regarding POST /create", () => {
     expect(err?.errors[0]?.message).toBe(CreateErrors.expireDateTypeErr);
 
     // @ts-expect-error
-    data.expireDate = 123
-    const responsTwo = await request(app).post("/create").send(data).expect(400);
+    data.expireDate = 123;
+    const responsTwo = await request(app)
+      .post("/create")
+      .send(data)
+      .expect(400);
 
     const errTwo = JSON.parse(responsTwo.text);
     expect(errTwo?.errors[0]?.message).toBe(CreateErrors.expireDateErr);
-
   });
 });

@@ -3,8 +3,6 @@ import { ShortLinkMongo } from "@infra/short-link-mongo";
 import { ConfigHelpers } from "@infra/config-helpers";
 import { RequestValidationError } from "@application/errors/request-validation-error";
 import { CreateLink } from "../create-link";
-jest.mock("@infra/short-link-mongo");
-jest.mock("@infra/config-helpers");
 
 describe("In regards to CreateLink", () => {
   const data: ShortLinkRequest = { originalUrl: "http://www.google.com" };
@@ -64,6 +62,8 @@ describe("In regards to CreateLink", () => {
     };
     linkUseCase = new CreateLink(newdata, dbMock, configMock);
 
-    expect(linkUseCase.handle.bind(linkUseCase)).rejects.toThrowError(RequestValidationError)
+    expect(linkUseCase.handle.bind(linkUseCase)).rejects.toThrowError(
+      RequestValidationError
+    );
   });
 });

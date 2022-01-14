@@ -7,9 +7,18 @@ import { GetByShortUrlPresenter } from "@application/presenters/get-by-short-url
 
 const router = Router();
 
+export enum GetByShortUrlErrors {
+  invalidType = "Invalid short URL",
+}
+
 router.get(
   "/:shortUrlId",
-  [param("shortUrlId").isString().withMessage("Invalid short URL")],
+  [
+    param("shortUrlId")
+      .isString()
+      .notEmpty()
+      .withMessage(GetByShortUrlErrors.invalidType),
+  ],
   validateRequest,
   adaptRoute(new GetByShortUrlController(), new GetByShortUrlPresenter())
 );

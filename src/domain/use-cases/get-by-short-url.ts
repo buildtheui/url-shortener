@@ -6,6 +6,8 @@ export interface GetByShortUrlHandle {
   isExpired: boolean;
 }
 
+export const GET_BY_SHORT_URL_ERR = "URL not found";
+
 export class GetByShortUrl {
   constructor(private shortUrlId: string, private shortLinkDB: IShortLinkDB) {}
 
@@ -13,7 +15,7 @@ export class GetByShortUrl {
     const urlValue = await this.shortLinkDB.getByShortId(this.shortUrlId);
 
     if (urlValue == null) {
-      throw new BadRequestError("URL not found");
+      throw new BadRequestError(GET_BY_SHORT_URL_ERR);
     }
     return {
       url: urlValue.originalUrl,
