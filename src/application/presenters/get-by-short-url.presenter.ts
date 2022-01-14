@@ -1,9 +1,21 @@
-import { Response } from "express"
-import { Presenter } from "@application/base/presenter"
-import { ShortLinkDoc } from "@infra/model/short-link"
+import { Response } from "express";
+import { Presenter } from "@application/base/presenter";
+import { GetByShortUrlHandle } from "@domain/use-cases/get-by-short-url";
 
 export class GetByShortUrlPresenter extends Presenter {
-  transform(response: { url: string }, expressResponse: Response): void {
-    return expressResponse.redirect(301, response.url)
+  transform(
+    response: GetByShortUrlHandle,
+    expressResponse: Response
+  ): void | Response {
+    if (response.isExpired) {
+      return expressResponse.setHeader("Content-type", "text/html").status(403)
+        .send(`
+        <h1>Forbidden request</h1>
+        </br>
+        <p>This url has expired</p>      
+      `);
+    }
+
+    return expressResponse.redirect(301, response.url);
   }
 }
