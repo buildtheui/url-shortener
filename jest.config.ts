@@ -4,7 +4,7 @@ module.exports = async () => {
     preset: "ts-jest",
     testEnvironment: "node",
     verbose: true,
-    setupFilesAfterEnv: ["./src/main/test/setup.ts"],
+    setupFilesAfterEnv: ["./src/main/config/tests-init-setup.ts"],
     moduleNameMapper: {
       "^@application/(.*)": "<rootDir>/src/application/$1",
       "^@domain/(.*)": "<rootDir>/src/domain/$1",

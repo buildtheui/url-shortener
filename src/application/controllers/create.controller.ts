@@ -1,7 +1,7 @@
 import { Request } from "express"
 import { Controller } from "@application/base/controller"
 import { CreateLink } from "@domain/use-cases/create-link"
-import { ShortLinkMongo } from "src/infrastructure/short-link-mongo"
+import { ShortLinkMongo } from "@infra/short-link-mongo"
 import { ConfigHelpers } from "@infra/config-helpers"
 
 export class CreateController extends Controller {

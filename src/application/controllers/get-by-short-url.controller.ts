@@ -1,6 +1,6 @@
 import { Request } from "express";
 import { Controller } from "@application/base/controller";
-import { ShortLinkMongo } from "src/infrastructure/short-link-mongo";
+import { ShortLinkMongo } from "@infra/short-link-mongo";
 import { GetByShortUrl } from "@domain/use-cases/get-by-short-url";
 
 export class GetByShortUrlController extends Controller {

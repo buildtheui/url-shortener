@@ -5,7 +5,7 @@ import {
 } from "@domain/contracts/i-short-link-db";
 import { ShortUrlFields } from "@domain/entities/short-url";
 import { nanoid } from "nanoid";
-import { ShortLink, ShortLinkDoc } from "./model/short-link";
+import { ShortLink } from "./model/short-link";
 
 export class ShortLinkMongo implements IShortLinkDB {
   async save(data: IShortLinkData): Promise<ShortUrlFields> {
