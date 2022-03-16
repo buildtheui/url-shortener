@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { adaptRoute } from "@shortener/application/adapters/route-adapter";
+import { adaptRoute } from "@common";
 import { validateRequest } from "@common";
 import { param } from "express-validator";
 import { GetByShortUrlController } from "@shortener/application/controllers/get-by-short-url.controller";

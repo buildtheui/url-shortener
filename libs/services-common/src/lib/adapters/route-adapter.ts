@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express"
-import { Controller } from "@shortener/application/base/controller"
-import { Presenter } from "@shortener/application/base/presenter"
+import { Controller } from "../base/controller"
+import { Presenter } from "../base/presenter"
 
 export const adaptRoute =
   (controller: Controller, presenter: Presenter) =>

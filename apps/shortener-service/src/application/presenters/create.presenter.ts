@@ -1,5 +1,5 @@
 import { Response } from "express"
-import { Presenter } from "@shortener/application/base/presenter"
+import { Presenter } from "@common"
 import { ShortUrlFields } from "@shortener/domain/entities/short-url"
 
 export class CreatePresenter extends Presenter {

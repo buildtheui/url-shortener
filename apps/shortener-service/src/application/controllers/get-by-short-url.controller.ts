@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { Controller } from "@shortener/application/base/controller";
+import { Controller } from "@common";
 import { ShortLinkMongo } from "@shortener/infrastructure/short-link-mongo";
 import { GetByShortUrl } from "@shortener/domain/use-cases/get-by-short-url";
 

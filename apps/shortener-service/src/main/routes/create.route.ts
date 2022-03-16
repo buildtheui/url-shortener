@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { adaptRoute } from "@shortener/application/adapters/route-adapter";
+import { adaptRoute } from "@common";
+import { validateRequest } from "@common";
 import { CreateController } from "@shortener/application/controllers/create.controller";
 import { CreatePresenter } from "@shortener/application/presenters/create.presenter";
-import { validateRequest } from "@common";
 import { body } from "express-validator";
 
 const router = Router();

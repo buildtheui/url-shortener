@@ -1,5 +1,5 @@
 import { Response } from "express";
-import { Presenter } from "@shortener/application/base/presenter";
+import { Presenter } from "@common";
 import { GetByShortUrlHandle } from "@shortener/domain/use-cases/get-by-short-url";
 
 export class GetByShortUrlPresenter extends Presenter {
