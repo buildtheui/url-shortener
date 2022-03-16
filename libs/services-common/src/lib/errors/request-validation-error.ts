@@ -1,5 +1,5 @@
 import { Location, ValidationError } from "express-validator";
-import { CustomError } from "@shortener/application/base/custom-error";
+import { CustomError } from "./"
 
 export class RequestValidationError extends CustomError {
   statusCode = 400;
@@ -12,7 +12,7 @@ export class RequestValidationError extends CustomError {
 
   static buildCustomMessage(
     message: string,
-    value: any,
+    value: unknown,
     param: string,
     location: Location
   ): ValidationError {

@@ -1,4 +1,4 @@
-import { RequestValidationError } from "@shortener/application/errors/request-validation-error";
+import { RequestValidationError } from "@common";
 import { ShortLinkRequest } from "@shortener/application/types/short-link-request";
 import { IConfigHelpers } from "@shortener/domain/contracts/i-config-helpers";
 import { IShortLinkDB } from "@shortener/domain/contracts/i-short-link-db";

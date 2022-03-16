@@ -1,4 +1,4 @@
-import { BadRequestError } from "@shortener/application/errors/bad-request-error";
+import { BadRequestError } from "@common";
 import { IShortLinkDB } from "@shortener/domain/contracts/i-short-link-db";
 
 export interface GetByShortUrlHandle {

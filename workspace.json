@@ -1,6 +1,8 @@
 {
   "version": 2,
   "projects": {
+    "auth-service": "apps/auth-service",
+    "services-common": "libs/services-common",
     "shortener-service": "apps/shortener-service"
   }
 }

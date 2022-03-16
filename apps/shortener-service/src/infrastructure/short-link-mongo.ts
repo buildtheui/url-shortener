@@ -1,4 +1,4 @@
-import { RequestValidationError } from "@shortener/application/errors/request-validation-error";
+import { RequestValidationError } from "@common";
 import {
   IShortLinkData,
   IShortLinkDB,

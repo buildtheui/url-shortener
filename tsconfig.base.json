@@ -16,7 +16,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@shortener/*": ["apps/shortener-service/src/*"]
+      "@auth/*": ["apps/auth-service/src/*"],
+      "@shortener/*": ["apps/shortener-service/src/*"],
+      "@common": ["libs/services-common/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

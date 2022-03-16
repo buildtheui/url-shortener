@@ -1,4 +1,4 @@
-import { CustomError } from "@shortener/application/base/custom-error"
+import { CustomError } from "./"
 
 export class BadRequestError extends CustomError {
   readonly statusCode = 400

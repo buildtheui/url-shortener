@@ -1,7 +1,7 @@
 import { ShortLinkRequest } from "@shortener/application/types/short-link-request";
 import { ShortLinkMongo } from "@shortener/infrastructure/short-link-mongo";
 import { ConfigHelpers } from "@shortener/infrastructure/config-helpers";
-import { RequestValidationError } from "@shortener/application/errors/request-validation-error";
+import { RequestValidationError } from "@common";
 import { CreateLink } from "../create-link";
 
 describe("In regards to CreateLink", () => {

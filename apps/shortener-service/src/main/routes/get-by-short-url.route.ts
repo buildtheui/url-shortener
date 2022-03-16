@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { adaptRoute } from "@shortener/application/adapters/route-adapter";
-import { validateRequest } from "@shortener/main/middlewares/validate-request";
+import { validateRequest } from "@common";
 import { param } from "express-validator";
 import { GetByShortUrlController } from "@shortener/application/controllers/get-by-short-url.controller";
 import { GetByShortUrlPresenter } from "@shortener/application/presenters/get-by-short-url.presenter";

@@ -1,4 +1,4 @@
-import { CustomError } from "@shortener/application/base/custom-error"
+import { CustomError } from "./"
 
 export class NotFoundError extends CustomError {
   statusCode = 404

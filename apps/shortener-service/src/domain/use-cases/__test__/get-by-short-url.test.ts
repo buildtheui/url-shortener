@@ -1,4 +1,4 @@
-import { BadRequestError } from "@shortener/application/errors/bad-request-error";
+import { BadRequestError } from "@common";
 import { ShortLinkMongo } from "@shortener/infrastructure/short-link-mongo";
 import { GetByShortUrl } from "../get-by-short-url";
 
