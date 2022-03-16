@@ -1,0 +1,6 @@
+{
+  "version": 2,
+  "projects": {
+    "shortener-service": "apps/shortener-service"
+  }
+}
