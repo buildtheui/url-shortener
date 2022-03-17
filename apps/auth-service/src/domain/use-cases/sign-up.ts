@@ -1,6 +1,6 @@
 import { BadRequestError } from '@common';
 import { IUserDb } from '../../domain/contracts/i-user-db';
-import { IAuthService } from '../../domain/contracts/I-auth-service';
+import { IAuthService } from '../../domain/contracts/i-auth-service';
 import { SignUpResponse, UserSignUpData } from '../../domain/types/user-data';
 
 export class SignUp {

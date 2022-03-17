@@ -1,11 +1,29 @@
 import { IUserDb } from '../domain/contracts/i-user-db';
 import { UserData } from '../domain/entities/user';
+import { PrismaClient } from './model/prisma/client';
+import { Password } from './model/password';
 
 export class userDb implements IUserDb {
-  findUserByEmail(email: string): UserData {
-    throw new Error('Method not implemented.');
+  private prisma: PrismaClient;
+
+  constructor() {
+    this.prisma = new PrismaClient();
   }
-  createUser(user: UserData): UserData {
-    throw new Error('Method not implemented.');
+
+  async findUserByEmail(email: string): Promise<UserData | undefined> {
+    const { createdAt, ...userData } = await this.prisma.user.findUnique({
+      where: { email },
+    });
+    return userData;
+  }
+  async createUser(user: UserData): Promise<UserData> {
+    const { password: rawPassword, ...rest } = user;
+    const password = await Password.toHash(rawPassword);
+
+    const { createdAt, ...newUser } = await this.prisma.user.create({
+      data: { ...rest, password },
+    });
+
+    return newUser;
   }
 }

@@ -1,4 +1,4 @@
-import { IAuthService } from '../domain/contracts/I-auth-service';
+import { IAuthService } from '../domain/contracts/i-auth-service';
 import { UserData } from '../domain/entities/user';
 
 export class AuthService implements IAuthService {
