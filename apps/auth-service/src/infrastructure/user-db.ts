@@ -11,10 +11,12 @@ export class userDb implements IUserDb {
   }
 
   async findUserByEmail(email: string): Promise<UserData | undefined> {
-    const { createdAt, ...userData } = await this.prisma.user.findUnique({
-      where: { email },
-    });
-    return userData;
+    const { createdAt, ...userData } =
+      (await this.prisma.user.findUnique({
+        where: { email },
+      })) ?? {};
+
+    return createdAt ? (userData as UserData) : undefined;
   }
   async createUser(user: UserData): Promise<UserData> {
     const { password: rawPassword, ...rest } = user;

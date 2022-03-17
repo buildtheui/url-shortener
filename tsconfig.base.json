@@ -17,8 +17,8 @@
     "baseUrl": ".",
     "paths": {
       "@auth/*": ["apps/auth-service/src/*"],
-      "@shortener/*": ["apps/shortener-service/src/*"],
-      "@common": ["libs/services-common/src/index.ts"]
+      "@common": ["libs/services-common/src/index.ts"],
+      "@shortener/*": ["apps/shortener-service/src/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

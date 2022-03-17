@@ -7,13 +7,13 @@
     "dev": "IS_DEVELOP_ENV=true nx serve",
     "build": "nx build",
     "test": "nx test",
-    "prisma:migrate": "dotenv -e apps/auth-service/.env -- yarn prisma migrate dev --name init --schema=apps/auth-service/src/infrastructure/model/prisma/schema.prisma"
+    "prisma:migrate": "dotenv -e apps/auth-service/.env -- yarn prisma migrate dev --name init --schema=apps/auth-service/src/infrastructure/model/prisma/schema.prisma",
+    "prisma:generate": "yarn prisma generate --schema=apps/auth-service/src/infrastructure/model/prisma/schema.prisma"
   },
   "private": true,
   "dependencies": {
     "@prisma/client": "^3.11.0",
     "cookie-session": "^2.0.0",
-    "crypto": "^1.0.1",
     "dotenv": "^11.0.0",
     "express": "^4.17.2",
     "express-async-errors": "^3.1.1",

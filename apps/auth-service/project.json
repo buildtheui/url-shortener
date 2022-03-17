@@ -9,7 +9,8 @@
       "options": {
         "outputPath": "dist/apps/auth-service",
         "main": "apps/auth-service/src/index.ts",
-        "tsConfig": "apps/auth-service/tsconfig.app.json"
+        "tsConfig": "apps/auth-service/tsconfig.app.json",
+        "externalDependencies": ["_http_common", "encoding"]
       },
       "configurations": {
         "production": {

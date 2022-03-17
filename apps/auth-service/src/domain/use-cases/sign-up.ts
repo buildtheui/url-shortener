@@ -13,9 +13,9 @@ export class SignUp {
   async handle(): Promise<SignUpResponse> {
     const { email } = this.data;
 
-    const existingUser = this.userDb.findUserByEmail(email);
+    const existingUser = await this.userDb.findUserByEmail(email);
 
-    if (!existingUser) {
+    if (existingUser) {
       throw new BadRequestError('email in use');
     }
 
