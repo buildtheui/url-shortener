@@ -1,4 +1,4 @@
-import { IConfigHelpers } from "@shortener/domain/contracts/i-config-helpers";
+import { IConfigHelpers } from '../domain/contracts/i-config-helpers';
 
 export class ConfigHelpers implements IConfigHelpers {
   getHostURL(): string {
@@ -7,7 +7,7 @@ export class ConfigHelpers implements IConfigHelpers {
       : `${process.env.HOST}`;
   }
   isDevelopment(): boolean {
-    // TODO: validate what is the best way to get the environment  
+    // TODO: validate what is the best way to get the environment
     return !!process.env.IS_DEVELOP_ENV;
   }
 }

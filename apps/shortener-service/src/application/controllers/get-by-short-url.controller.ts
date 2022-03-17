@@ -1,7 +1,7 @@
-import { Request } from "express";
-import { Controller } from "@common";
-import { ShortLinkMongo } from "@shortener/infrastructure/short-link-mongo";
-import { GetByShortUrl } from "@shortener/domain/use-cases/get-by-short-url";
+import { Request } from 'express';
+import { Controller } from '@common';
+import { ShortLinkMongo } from '../../infrastructure/short-link-mongo';
+import { GetByShortUrl } from '../../domain/use-cases/get-by-short-url';
 
 export class GetByShortUrlController extends Controller {
   async forward(req: Request): Promise<object> {

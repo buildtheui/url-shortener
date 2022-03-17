@@ -1,8 +1,8 @@
-import { ShortUrlFields } from "@shortener/domain/entities/short-url";
-import mongoose from "mongoose";
-import { nanoid } from "nanoid";
+import { ShortUrlFields } from '../../domain/entities/short-url';
+import mongoose from 'mongoose';
+import { nanoid } from 'nanoid';
 
-interface ShortLinkAttrs extends Omit<ShortUrlFields, "id"> {
+interface ShortLinkAttrs extends Omit<ShortUrlFields, 'id'> {
   _id: string;
 }
 
@@ -51,7 +51,7 @@ shortLinkSchema.statics.build = (attrs: ShortLinkAttrs) => {
 };
 
 const ShortLink = mongoose.model<ShortLinkDoc, ShortLinkModel>(
-  "ShortLink",
+  'ShortLink',
   shortLinkSchema
 );
 

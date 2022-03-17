@@ -1,21 +1,21 @@
-import { RequestValidationError } from "@common";
+import { RequestValidationError } from '@common';
+import { nanoid } from 'nanoid';
 import {
   IShortLinkData,
   IShortLinkDB,
-} from "@shortener/domain/contracts/i-short-link-db";
-import { ShortUrlFields } from "@shortener/domain/entities/short-url";
-import { nanoid } from "nanoid";
-import { ShortLink } from "./model/short-link";
+} from '../domain/contracts/i-short-link-db';
+import { ShortUrlFields } from '../domain/entities/short-url';
+import { ShortLink } from './model/short-link';
 
 export class ShortLinkMongo implements IShortLinkDB {
   async save(data: IShortLinkData): Promise<ShortUrlFields> {
     const response = await ShortLink.findOne({ customAlias: data.customAlias });
     if (response) {
       const customMessageError = RequestValidationError.buildCustomMessage(
-        "The URL alias already exists, please try another one",
+        'The URL alias already exists, please try another one',
         data.customAlias,
-        "customAlias",
-        "body"
+        'customAlias',
+        'body'
       );
       throw new RequestValidationError([customMessageError]);
     }
@@ -39,7 +39,7 @@ export class ShortLinkMongo implements IShortLinkDB {
   }
 
   deleteById(): object {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
   generateShortId(): string {
     return nanoid(10);

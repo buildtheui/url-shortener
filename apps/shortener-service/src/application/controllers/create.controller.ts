@@ -1,8 +1,8 @@
-import { Request } from "express"
-import { Controller } from "@common"
-import { CreateLink } from "@shortener/domain/use-cases/create-link"
-import { ShortLinkMongo } from "@shortener/infrastructure/short-link-mongo"
-import { ConfigHelpers } from "@shortener/infrastructure/config-helpers"
+import { Request } from 'express';
+import { Controller } from '@common';
+import { CreateLink } from '../../domain/use-cases/create-link';
+import { ShortLinkMongo } from '../../infrastructure/short-link-mongo';
+import { ConfigHelpers } from '../../infrastructure/config-helpers';
 
 export class CreateController extends Controller {
   async forward(req: Request): Promise<object> {
@@ -11,7 +11,7 @@ export class CreateController extends Controller {
       { originalUrl, customAlias, expireDate },
       new ShortLinkMongo(),
       new ConfigHelpers()
-    )
-    return await newShortLink.handle()
+    );
+    return await newShortLink.handle();
   }
 }
