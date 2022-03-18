@@ -7,6 +7,7 @@
     "dev": "IS_DEVELOP_ENV=true nx serve",
     "build": "nx build",
     "test": "nx test",
+    "lint": "nx lint",
     "prisma:migrate": "dotenv -e apps/auth-service/.env -- yarn prisma migrate dev --name init --schema=apps/auth-service/src/infrastructure/model/prisma/schema.prisma",
     "prisma:generate": "yarn prisma generate --schema=apps/auth-service/src/infrastructure/model/prisma/schema.prisma"
   },

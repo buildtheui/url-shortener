@@ -1,8 +1,8 @@
-import { RequestValidationError } from "@common";
-import { ShortLinkRequest } from "@shortener/application/types/short-link-request";
-import { IConfigHelpers } from "@shortener/domain/contracts/i-config-helpers";
-import { IShortLinkDB } from "@shortener/domain/contracts/i-short-link-db";
-import { ShortUrl } from "@shortener/domain/entities/short-url";
+import { RequestValidationError } from '@common';
+import { ShortLinkRequest } from '../../application/types/short-link-request';
+import { IConfigHelpers } from '../../domain/contracts/i-config-helpers';
+import { IShortLinkDB } from '../../domain/contracts/i-short-link-db';
+import { ShortUrl } from '../../domain/entities/short-url';
 
 export class CreateLink {
   constructor(
@@ -16,10 +16,10 @@ export class CreateLink {
 
     if (!originalUrl) {
       const errorMessage = RequestValidationError.buildCustomMessage(
-        "originalUrl is required",
+        'originalUrl is required',
         originalUrl,
-        "originalUrl",
-        "body"
+        'originalUrl',
+        'body'
       );
       throw new RequestValidationError([errorMessage]);
     }

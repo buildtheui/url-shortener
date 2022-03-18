@@ -1,22 +1,19 @@
-import request from "supertest";
-import { app } from "@shortener/main/app";
-import { CreateErrors } from "@shortener/main/routes/create.route";
+import request from 'supertest';
+import { app } from '../../main/app';
+import { CreateErrors } from '../../main/routes/create.route';
 
-jest.unmock("@shortener/infrastructure/short-link-mongo");
-jest.unmock("@shortener/infrastructure/config-helpers");
-
-describe("regarding POST /create", () => {
+describe('regarding POST /create', () => {
   const dataInit = {
-    originalUrl: "https://www.google.com",
+    originalUrl: 'https://www.google.com',
   };
 
-  it("should create a new short url with all the params filled", async () => {
+  it('should create a new short url with all the params filled', async () => {
     const data = {
       ...dataInit,
-      customAlias: "google",
+      customAlias: 'google',
       expireDate: Date.now() + 10000,
     };
-    const response = await request(app).post("/create").send(data).expect(200);
+    const response = await request(app).post('/create').send(data).expect(200);
     expect(response.body).toEqual({
       customAlias: data.customAlias,
       expireDate: data.expireDate,
@@ -26,8 +23,11 @@ describe("regarding POST /create", () => {
     });
   });
 
-  it("should create a new short url with id instead of alias", async () => {    
-    const response = await request(app).post("/create").send(dataInit).expect(200);
+  it('should create a new short url with id instead of alias', async () => {
+    const response = await request(app)
+      .post('/create')
+      .send(dataInit)
+      .expect(200);
     expect(response.body).toEqual({
       id: response.body.id,
       originalUrl: dataInit.originalUrl,
@@ -35,19 +35,19 @@ describe("regarding POST /create", () => {
     });
   });
 
-  it("should fail if invalid originalUrl is sent", async () => {
+  it('should fail if invalid originalUrl is sent', async () => {
     const data = {
-      originalUrl: "",
+      originalUrl: '',
     };
-    const response = await request(app).post("/create").send(data).expect(400);
+    const response = await request(app).post('/create').send(data).expect(400);
 
     const err = JSON.parse(response.text);
     expect(err?.errors[0]?.message).toBe(CreateErrors.originalUrlErr);
 
-    data.originalUrl = "this is a wrong url.com";
+    data.originalUrl = 'this is a wrong url.com';
 
     const responseTwo = await request(app)
-      .post("/create")
+      .post('/create')
       .send(data)
       .expect(400);
 
@@ -55,28 +55,28 @@ describe("regarding POST /create", () => {
     expect(errTwo?.errors[0]?.message).toBe(CreateErrors.originalUrlErr);
   });
 
-  it("should fail if invalid customAlias is sent", async () => {
+  it('should fail if invalid customAlias is sent', async () => {
     const data = {
       ...dataInit,
-      customAlias: "txt",
+      customAlias: 'txt',
     };
-    const response = await request(app).post("/create").send(data).expect(400);
+    const response = await request(app).post('/create').send(data).expect(400);
 
     const err = JSON.parse(response.text);
     expect(err?.errors[0]?.message).toBe(CreateErrors.customAliasErr);
 
-    data.customAlias = "this-is-an-invalid-alias-to-long";
+    data.customAlias = 'this-is-an-invalid-alias-to-long';
     const responseTwo = await request(app)
-      .post("/create")
+      .post('/create')
       .send(data)
       .expect(400);
 
     const errTwo = JSON.parse(responseTwo.text);
     expect(errTwo?.errors[0]?.message).toBe(CreateErrors.customAliasErr);
 
-    data.customAlias = "is invalid";
+    data.customAlias = 'is invalid';
     const responseThree = await request(app)
-      .post("/create")
+      .post('/create')
       .send(data)
       .expect(400);
 
@@ -84,12 +84,12 @@ describe("regarding POST /create", () => {
     expect(errThree?.errors[0]?.message).toBe(CreateErrors.customAliasSpaceErr);
   });
 
-  it("should fail if invalid expire data is sent", async () => {
+  it('should fail if invalid expire data is sent', async () => {
     const data = {
       ...dataInit,
-      expireDate: "jan 31, 2022",
+      expireDate: 'jan 31, 2022',
     };
-    const response = await request(app).post("/create").send(data).expect(400);
+    const response = await request(app).post('/create').send(data).expect(400);
 
     const err = JSON.parse(response.text);
     expect(err?.errors[0]?.message).toBe(CreateErrors.expireDateTypeErr);
@@ -97,7 +97,7 @@ describe("regarding POST /create", () => {
     // @ts-expect-error data mutatuion allowed here
     data.expireDate = 123;
     const responsTwo = await request(app)
-      .post("/create")
+      .post('/create')
       .send(data)
       .expect(400);
 

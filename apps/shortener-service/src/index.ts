@@ -1,7 +1,7 @@
-import env from "dotenv";
-import mongoose from "mongoose";
-import { MongoMemoryServer } from "mongodb-memory-server";
-import { app } from "@shortener/main/app";
+import env from 'dotenv';
+import mongoose from 'mongoose';
+import { MongoMemoryServer } from 'mongodb-memory-server';
+import { app } from './main/app';
 
 env.config();
 

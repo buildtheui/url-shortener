@@ -1,12 +1,12 @@
-import { BadRequestError } from "@common";
-import { IShortLinkDB } from "@shortener/domain/contracts/i-short-link-db";
+import { BadRequestError } from '@common';
+import { IShortLinkDB } from '../../domain/contracts/i-short-link-db';
 
 export interface GetByShortUrlHandle {
   url: string;
   isExpired: boolean;
 }
 
-export const GET_BY_SHORT_URL_ERR = "URL not found";
+export const GET_BY_SHORT_URL_ERR = 'URL not found';
 
 export class GetByShortUrl {
   constructor(private shortUrlId: string, private shortLinkDB: IShortLinkDB) {}

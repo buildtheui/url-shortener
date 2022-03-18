@@ -1,11 +1,14 @@
-import { ShortLinkRequest } from "@shortener/application/types/short-link-request";
-import { ShortLinkMongo } from "@shortener/infrastructure/short-link-mongo";
-import { ConfigHelpers } from "@shortener/infrastructure/config-helpers";
-import { RequestValidationError } from "@common";
-import { CreateLink } from "../create-link";
+import { ShortLinkRequest } from '../../../application/types/short-link-request';
+import { ShortLinkMongo } from '../../../infrastructure/short-link-mongo';
+import { ConfigHelpers } from '../../../infrastructure/config-helpers';
+import { RequestValidationError } from '@common';
+import { CreateLink } from '../create-link';
 
-describe("In regards to CreateLink", () => {
-  const data: ShortLinkRequest = { originalUrl: "http://www.google.com" };
+jest.mock('../../../infrastructure/config-helpers');
+jest.mock('../../../infrastructure/short-link-mongo');
+
+describe('In regards to CreateLink', () => {
+  const data: ShortLinkRequest = { originalUrl: 'http://www.google.com' };
   let dbMock: ShortLinkMongo;
   let configMock: ConfigHelpers;
   let linkUseCase: CreateLink;
@@ -16,7 +19,7 @@ describe("In regards to CreateLink", () => {
     linkUseCase = new CreateLink(data, dbMock, configMock);
   });
 
-  it("should save a valid url without an alias and expired date", () => {
+  it('should save a valid url without an alias and expired date', () => {
     linkUseCase.handle();
 
     const generatedId = (dbMock.generateShortId as jest.Mock).mock.results[0]
@@ -32,10 +35,10 @@ describe("In regards to CreateLink", () => {
     });
   });
 
-  it("should save a valid url with an alias and expired date", () => {
+  it('should save a valid url with an alias and expired date', () => {
     const newdata: ShortLinkRequest = {
       ...data,
-      customAlias: "test",
+      customAlias: 'test',
       expireDate: 1234,
     };
     linkUseCase = new CreateLink(newdata, dbMock, configMock);
@@ -55,10 +58,10 @@ describe("In regards to CreateLink", () => {
     });
   });
 
-  it("should throw an error if the originalUrl does not come in the data", () => {
+  it('should throw an error if the originalUrl does not come in the data', () => {
     const newdata: ShortLinkRequest = {
-      originalUrl: "",
-      customAlias: "test",
+      originalUrl: '',
+      customAlias: 'test',
     };
     linkUseCase = new CreateLink(newdata, dbMock, configMock);
 

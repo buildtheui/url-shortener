@@ -1,6 +1,6 @@
-import { Response } from "express";
-import { Presenter } from "@common";
-import { GetByShortUrlHandle } from "@shortener/domain/use-cases/get-by-short-url";
+import { Response } from 'express';
+import { Presenter } from '@common';
+import { GetByShortUrlHandle } from '../../domain/use-cases/get-by-short-url';
 
 export class GetByShortUrlPresenter extends Presenter {
   transform(
@@ -8,7 +8,7 @@ export class GetByShortUrlPresenter extends Presenter {
     expressResponse: Response
   ): void | Response {
     if (response.isExpired) {
-      return expressResponse.setHeader("Content-type", "text/html").status(403)
+      return expressResponse.setHeader('Content-type', 'text/html').status(403)
         .send(`
         <h1>Forbidden request</h1>
         </br>
