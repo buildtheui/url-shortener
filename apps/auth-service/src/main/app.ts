@@ -6,6 +6,7 @@ import { json } from 'body-parser';
 import { errorHandler } from '@common';
 import { NotFoundError } from '@common';
 import { SignUpRouter } from './routes/sign-up.route';
+import { SignInRouter } from './routes/sign-in.route';
 
 env.config();
 const app = express();
@@ -20,6 +21,7 @@ app.use(
 );
 
 app.use(SignUpRouter);
+app.use(SignInRouter);
 
 app.all('*', async (_req, _res) => {
   throw new NotFoundError();
